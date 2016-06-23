@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> WebGL - Check availability</title>
+    </head>
+    <body>
+        <canvas id="canvas_grid" width="10" height="10" style="border: 1px solid green;float:left; margin: 2px">Your browser does not support HTML5</canvas>
+        <div><strong>Your browser supports next HTML5 WebGL features:</strong></div>
+        <script>
+            // Init WebGL
+            var webgl = (function (canvas) {
+                console.log('Init WebGL support:', !!window.WebGLRenderingContext, canvas);
+                var webgl = {};
+                // WebGL is not supported at all
+                if (!window.WebGLRenderingContext) {
+                    return webgl;
+                }
+                // Get WegGL version
+                var i = 0;
+                var typeList = ['webgl', 'experimental-webgl', 'moz-webgl', 'webkit-3d'];
+                // Find related object
+                do {
+                    console.log('Check:', typeList[i]);
+                    try {webgl = canvas.getContext(typeList[i++]);} catch (e) {}
+                } while (!webgl && typeList[i]);
+                // Resulted framework
+                return webgl;
+            })(document.getElementById('canvas_grid'));
+
+            // Can be usefull to emulate missing functionality
+            var proxy = new Proxy(webgl, {
+                /**
+                 * Magic call to cover missing functionality
+                 *
+                 * @param {String} target
+                 * @param {String} name
+                 * @throws {Error} Your browser does not support needed WebGL functionality
+                 */
+                get: function get(target, name) {
+                    console.log('Missing:', target, name);
+                    throw new Error('Your browser does not support needed WebGL functionality');
+                }
+            });
+
+            // Check your console
+            console.log(webgl);
+            webgl.getSupportedExtensions().forEach(function(module) {
+                var element = document.createElement('div');
+                element.innerHTML = '+ ' + module;
+                document.body.appendChild(element);
+            });
+        </script>
+    </body>
+</html>
