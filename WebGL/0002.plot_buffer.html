@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> WebGL - Check availability</title>
+    </head>
+    <body>
+        <canvas id="canvas_grid" width="200" height="200" style="border: 1px solid green;margin: 2px">Your browser does not support HTML5</canvas>
+        <script>
+            // Init WebGL
+            var webgl = (function (canvas) {
+                var webgl = {};
+                // WebGL is not supported at all
+                if (!window.WebGLRenderingContext) {
+                    return webgl;
+                }
+                // Get WegGL version
+                var i = 0;
+                var typeList = ['webgl', 'experimental-webgl', 'moz-webgl', 'webkit-3d'];
+                // Find related object
+                do {
+                    try {
+                        webgl = canvas.getContext(typeList[i++]);
+                    } catch (e) {
+                    }
+                } while (!webgl && typeList[i]);
+                // Resulted framework
+                return webgl;
+            })(document.getElementById('canvas_grid'));
+
+            // Common way to add events
+            var addEvent = function (obj, type, callback) {
+                if (typeof obj === 'string') {
+                    obj = this.get(obj);
+                }
+                if (!obj) {
+                    return;
+                }
+                // delEvent(obj, type, callback);
+                if (obj.addEventListener) {
+                    obj.addEventListener(type, callback, false);
+                } else if (obj.attachEvent) {
+                    obj.attachEvent('on' + type, callback);
+                } else {
+                    obj['on' + type] = callback;
+                }
+                return obj;
+            };
+
+            // Mouse movement affect to the canvas color
+            addEvent(document, 'mousemove', function() {
+                // Red Green Blue Alpha
+                webgl.clearColor(Math.random(0, 1), Math.random(0, 1), Math.random(0, 1), 1);
+                webgl.clear(webgl.COLOR_BUFFER_BIT);
+                webgl.viewport(0, 0, 1, 1);
+            });
+        </script>
+    </body>
+</html>
