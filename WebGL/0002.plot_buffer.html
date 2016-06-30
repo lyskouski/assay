@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>[TODO] WebGL - VBO (Vertex Buffer Object) and IBO (Index Buffer Object) buffers usages</title>
+        <!-- "MAGIC TRIPS" ARE NEEDED -->
+        <!-- view-source:http://learningwebgl.com/lessons/lesson01/index.html -->
     </head>
     <body>
         <canvas id="canvas_grid" width="200" height="200" style="border: 1px solid green;margin: 2px">Your browser does not support HTML5</canvas>
@@ -26,6 +28,10 @@
                 // Resulted framework
                 return webgl;
             })(document.getElementById('canvas_grid'));
+
+            // Prepare for plotting
+            webgl.viewport(0, 0, webgl.viewportWidth, webgl.viewportHeight);
+            webgl.clear(webgl.COLOR_BUFFER_BIT | webgl.DEPTH_BUFFER_BIT);
 
             // Vertices that describe the geometry of a cone
             var vertices = [
