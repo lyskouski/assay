@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> WebGL - Check availability</title>
+        <title>[TODO] WebGL - VBO (Vertex Buffer Object) and IBO (Index Buffer Object) buffers usages</title>
     </head>
     <body>
         <canvas id="canvas_grid" width="200" height="200" style="border: 1px solid green;margin: 2px">Your browser does not support HTML5</canvas>
@@ -27,32 +27,46 @@
                 return webgl;
             })(document.getElementById('canvas_grid'));
 
-            // Common way to add events
-            var addEvent = function (obj, type, callback) {
-                if (typeof obj === 'string') {
-                    obj = this.get(obj);
-                }
-                if (!obj) {
-                    return;
-                }
-                // delEvent(obj, type, callback);
-                if (obj.addEventListener) {
-                    obj.addEventListener(type, callback, false);
-                } else if (obj.attachEvent) {
-                    obj.attachEvent('on' + type, callback);
-                } else {
-                    obj['on' + type] = callback;
-                }
-                return obj;
-            };
+            // Vertices that describe the geometry of a cone
+            var vertices = [
+                1.5, 0, 0,
+                -1.5, 1, 0,
+                -1.5, 0.809017, 0.587785,
+                -1.5, 0.309017, 0.951057,
+                -1.5, -0.309017, 0.951057,
+                -1.5, -0.809017, 0.587785,
+                -1.5, -1, 0.0,
+                -1.5, -0.809017, -0.587785,
+                -1.5, -0.309017, -0.951057,
+                -1.5, 0.309017, -0.951057,
+                -1.5, 0.809017, -0.587785
+            ];
+            // Indices that describe the geometry of a cone
+            var indices = [
+                0, 1, 2,
+                0, 2, 3,
+                0, 3, 4,
+                0, 4, 5,
+                0, 5, 6,
+                0, 6, 7,
+                0, 7, 8,
+                0, 8, 9,
+                0, 9, 10,
+                0, 10, 1
+            ];
+            var coneVBO = webgl.createBuffer();
+            webgl.bindBuffer(webgl.ARRAY_BUFFER, coneVBO);
+            webgl.bufferData(webgl.ARRAY_BUFFER, new Float32Array(vertices), webgl.STATIC_DRAW);
+            webgl.bindBuffer(webgl.ARRAY_BUFFER, null);
 
-            // Mouse movement affect to the canvas color
-            addEvent(document, 'mousemove', function() {
-                // Red Green Blue Alpha
-                webgl.clearColor(Math.random(0, 1), Math.random(0, 1), Math.random(0, 1), 1);
-                webgl.clear(webgl.COLOR_BUFFER_BIT);
-                webgl.viewport(0, 0, 1, 1);
-            });
+            var coneIBO = webgl.createBuffer();
+            webgl.bindBuffer(webgl.ELEMENT_ARRAY_BUFFER, coneIBO);
+            webgl.bufferData(webgl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), webgl.STATIC_DRAW);
+            webgl.bindBuffer(webgl.ELEMENT_ARRAY_BUFFER, null);
+
+            // Plot shaders in canvas
+            webgl.drawElements(webgl.TRIANGLES, 3, webgl.FLOAT, 0);
+
         </script>
     </body>
 </html>
