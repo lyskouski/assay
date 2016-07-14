@@ -58,7 +58,7 @@ gulp.task('cleanup', function () {
     if (!ext) {
         throw Error('Missing extension! Use: gulp (js|css)');
     }
-    console.log('[!] Cleanuo: ', ext);
+    console.log('[!] Cleanup: ', ext);
 
     return del([
         publicDir + ext + '.min/**/*'
