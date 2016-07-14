@@ -1,0 +1,16 @@
+{
+    "default": {
+        "js": [
+
+        ],
+        "css": [
+
+        ],
+        "datetime": 1468250886,
+        "version": "1.0.0"
+    },
+    "another/path": {
+        "js": [],
+        "css": []
+    }
+}

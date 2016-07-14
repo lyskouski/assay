@@ -1,14 +1,13 @@
 {
-  "name": "project",
+  "name": "Gulp Tasks",
   "version": "1.0.0",
-  "description": "Gulp tasks for project",
-  "command": "gulp",
-  "isShellCommand": true,
+  "description": "Task manager for the project",
   "main": "gulpfile.js",
   "scripts": {
-    "Build project": "gulp build",
+    "BUILD Project": "gulp build",
     "Minify CSS": "gulp css",
-    "Minify JavaScript": "gulp js"
+    "Minify JavaScript": "gulp js",
+    "Observe Changes": "gulp watch"
   },
   "author": "s.lyskouski@creativity.by",
   "license": "ISC",
@@ -19,12 +18,14 @@
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-cssmin": "^0.1.7",
+    "gulp-gzip": "^1.4.0",
     "gulp-jsmin": "^0.1.5",
     "gulp-livereload": "^3.8.1",
     "gulp-uglify": "^1.5.4",
     "gulp-uncss": "^1.0.5",
     "gulp.spritesmith": "^6.2.1",
     "require-dir": "^0.3.0",
+    "run-sequence": "^1.2.2",
     "serve-static": "^1.11.1"
   }
 }
