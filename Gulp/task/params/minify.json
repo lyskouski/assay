@@ -9,8 +9,19 @@
         "datetime": 1468250886,
         "version": "1.0.0"
     },
+    "one/path": {
+        "js": [
+            "filepath.js",
+            "!ignore_for_not_minified_version.js",
+            "*always_at_the_end_of_list.js"
+        ],
+        "css": [],
+        "datetime": 1468250886
+    },
     "another/path": {
+        "@extend": "one/path",
         "js": [],
-        "css": []
+        "css": [],
+        "datetime": 1468250886
     }
 }
