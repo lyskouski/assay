@@ -16,4 +16,8 @@ gulp.task('watch', function () {
     gulp.watch('public/js/**/*', function () {
         gulp.start('js');
     });
+
+    gulp.watch('public/image/**/*', function () {
+        gulp.start('image');
+    });
 });
