@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <database name="{database name}">
+        <table_data name="{table name}">
+            <row>
+                <field name="{name}">{value}</field>
+                <!-- other fields -->
+            </row>
+            <row>
+                <field name="{name}">{value}</field>
+                <!-- other fields -->
+            </row>
+            <!-- ... -->
+        </table_data>
+        <!-- ... -->
+        <table_data name="{another table name}">
+            <row>
+                <field name="{name}">{value}</field>
+                <!-- other fields -->
+            </row>
+            <row>
+                <field name="{name}">{value}</field>
+                <!-- other fields -->
+            </row>
+            <!-- ... -->
+        </table_data>
+    </database>
+</mysqldump>
