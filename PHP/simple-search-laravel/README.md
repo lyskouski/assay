@@ -1,3 +1,11 @@
+# TO START
+1. `php artisan optimize:clear` to clear cache
+2. `npm run build` to build assets
+3. `php artisan serve` to start Web Server
+4. `php artisan websockets:serve` to start Socket Server
+
+# Basic Info
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
