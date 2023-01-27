@@ -10,11 +10,12 @@
 @endsection
 
 @section('content')
+    <img src="" id="spa-image" />
     <script type="module">
         window.onload = function () {
             Echo.channel('image')
                 .listen('ImageShown', (e) => {
-                    console.log(e);
+                    document.getElementById('spa-image').src = '/images/' + e.image + '.png';
                 });
         };
     </script>
