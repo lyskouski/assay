@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::get('/search', 'App\Http\Controllers\SearchController@index')->name("search");
+Route::get('/listen', 'App\Http\Controllers\ListenController@index')->name("listen");
+Route::get('/administer', 'App\Http\Controllers\AdministerController@index')->name("administer");
