@@ -21,5 +21,6 @@ Route::get('/search', 'App\Http\Controllers\SearchController@index')->name("sear
 Route::post('/search', 'App\Http\Controllers\SearchController@search')->name("search");
 
 Route::get('/listen', 'App\Http\Controllers\ListenController@index')->name("listen");
+Route::post('/listen', 'App\Http\Controllers\ListenController@imageShown')->name("listen");
 
 Route::get('/administer', 'App\Http\Controllers\AdministerController@index')->name("administer");

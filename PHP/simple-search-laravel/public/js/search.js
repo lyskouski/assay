@@ -3,6 +3,15 @@ const imgList = document.getElementsByClassName('spa-image');
 Array.from(imgList).forEach((el) => {
     el.onclick = () => {
         const result = el.classList.toggle('spa-image--focus');
+        if (result) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', window.location + '/../listen', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                image: el.dataset.image,
+                _token: document.getElementById('spa-token').value
+            }));
+        }
     };
 });
 

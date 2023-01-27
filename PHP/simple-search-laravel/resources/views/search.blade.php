@@ -26,6 +26,7 @@
                         <button class="btn btn-lg btn-success" type="submit">Search</button>
                     </div>
                 </div>
+                <input id="spa-token" type="hidden" value="{{ csrf_token() }}" />
             </form>
         </div>
     </div>
@@ -34,10 +35,10 @@
         @foreach ($output as $product)
         <div class="col-md-4 col-lg-3 mb-2 spa-item">
             <div class="card">
-                <img src="{{ asset("/images/${product['id']}.png") }}" class="card-img-top img-card btn spa-image">
+                <img data-image="{{ $product['id'] }}" src="{{ asset("/images/${product['id']}.png") }}" class="card-img-top img-card btn spa-image">
                 <div class="card-body text-center">
-                    <div>[{{ $product["id"] }}] {{ $product["name"] }}</div>
-                    <span class="btn bg-primary text-white spa-save" data-scope="|{{ $product["id"] }}:{{ $product["name"] }}">Add to Favorite</span>
+                    <div>[{{ $product['id'] }}] {{ $product['name'] }}</div>
+                    <span class="btn bg-primary text-white spa-save" data-scope="|{{ $product['id'] }}:{{ $product['name'] }}">Add to Favorite</span>
                 </div>
             </div>
         </div>
@@ -50,7 +51,7 @@
         @foreach ($savedOutput as $product)
         <div class="col-md-4 col-lg-3 mb-2">
             <div class="card">
-                <img src="{{ asset("/images/${product[0]}.png") }}" class="card-img-top img-card btn spa-image">
+                <img data-image="{{ $product[0] }}" src="{{ asset("/images/${product[0]}.png") }}" class="card-img-top img-card btn spa-image">
                 <div class="card-body text-center">
                     <div>[{{ $product[0] }}] {{ $product[1] }}</div>
                 </div>

@@ -9,4 +9,9 @@ class ListenController extends Controller
     {
         return view('listen');
     }
+
+    public function imageShown(Request $request)
+    {
+        event (new \App\Events\ImageShown($request->get('image')));
+    }
 }
