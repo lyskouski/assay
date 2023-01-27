@@ -10,6 +10,7 @@
 @endsection
 
 @section('content')
+    <link href="/css/search.css?4" rel="stylesheet" />
     <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8">
             <form class="card card-sm" method="POST" action="/search">
@@ -28,17 +29,19 @@
             </form>
         </div>
     </div>
-
+    <div class="row">&nbsp;</div>
     <div class="row">
         @foreach ($output as $product)
         <div class="col-md-4 col-lg-3 mb-2">
             <div class="card">
-                <img src="{{ asset('/images/' . $product["id"]) }}" class="card-img-top img-card">
+                <img src="{{ asset("/images/${product['id']}.png") }}" class="card-img-top img-card btn spa-image">
                 <div class="card-body text-center">
-                    <span class="btn bg-primary text-white">{{ $product["name"] }}</span>
+                    <div>{{ $product["name"] }}</div>
+                    <span class="btn bg-primary text-white">Add to Favorite</span>
                 </div>
             </div>
         </div>
         @endforeach
     </div>
+    <script src="/js/search.js?4"></script>
 @endsection

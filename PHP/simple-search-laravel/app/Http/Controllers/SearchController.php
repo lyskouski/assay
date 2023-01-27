@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -14,6 +15,6 @@ class SearchController extends Controller
     {
         return view('search')
             ->with('searchInput', $request->get('search'))
-            ->with('output', []);
+            ->with('output', Product::all());
     }
 }
