@@ -3,8 +3,8 @@
 @section('title', 'Administer')
 
 @section('navigation')
-    <a class="nav-link" href="/search">Home</a>
-    <a class="nav-link" href="/search">Search</a>
-    <a class="nav-link" href="/listen">Listen</a>
-    <a class="nav-link active" href="/administer">Administer</a>
+    <a class="nav-link" href="/">Home</a>
+    <a class="nav-link" href="{{ route('search') }}">Search</a>
+    <a class="nav-link" href="{{ route('listen') }}">Listen</a>
+    <a class="nav-link active" href="{{ route('administer') }}">Administer</a>
 @endsection
