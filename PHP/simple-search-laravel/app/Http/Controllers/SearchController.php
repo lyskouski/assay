@@ -13,8 +13,9 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
+        $input = $request->get('search');
         return view('search')
-            ->with('searchInput', $request->get('search'))
-            ->with('output', Product::all());
+            ->with('searchInput', $input)
+            ->with('output', Product::matchCondition($input));
     }
 }
