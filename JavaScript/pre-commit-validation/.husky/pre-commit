@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+cd ui
+stagedJsFiles=$(git diff --relative --diff-filter=d --cached --name-only -- '*.ts' '*.tsx');
+if [ -n "$stagedJsFiles" ]; then
+    echo FILES: $stagedJsFiles
+    yarn validate:commit
+    yarn lint:commit $stagedJsFiles
+    yarn prettier:commit $stagedJsFiles
+fi
+cd ../

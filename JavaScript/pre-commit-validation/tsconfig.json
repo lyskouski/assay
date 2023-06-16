@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    //"noUnusedParameters": true,
+    "outDir": "dist",
+    "baseUrl": "src",
+    "lib": ["dom", "es7", "es6", "es2017.object", "es2017.string"],
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "node_modules",
+    "./src/**/__tests__",
+    "**/*.stories.tsx",
+    "public",
+    "dist",
+    "docs"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "useTranspileModule": true
+  }
+}
