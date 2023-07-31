@@ -1,5 +1,4 @@
 const readline = require("readline");
-const cache = require("memory-cache");
 const router = require("./lib/router");
 
 const terminal = readline.createInterface({
