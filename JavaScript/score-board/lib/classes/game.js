@@ -1,25 +1,29 @@
 const assert = require("assert");
 const storage = require("../storage");
+const Scoreboard = require("./scoreboard");
 
 class Game {
   static increment = 0;
+  board = null;
 
   constructor({id, home, away}) {
-    this._id = id ? this.get(id) : this.create(home, away);
+    this._id = id ? this._get(id) : this._create(home, away);
   }
 
-  get(id) {
-    const game = storage.get(id);
-    assert(game, "Game is missing!");
-    return game;
+  _get(id) {
+    const json = storage.get(id);
+    assert(json, "Game is missing!");
+    this.board = Scoreboard.fromString(json);
+    return game.id;
   }
 
-  create(home, away) {
+  _create(home, away) {
     const key = `${home}-${away}`;
     const check = storage.get(key);
     assert(!check, `Game is already started! Its ID: ${check}`);
     storage.set(key, ++Game.increment);
-    // storage.set(increment, new Scoreboard(increment, home, away));
+    this.board = new Scoreboard(Game.increment, home, away);
+    storage.set(Game.increment, this.board.toString());
     return Game.increment;
   }
 
