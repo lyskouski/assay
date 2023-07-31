@@ -1,5 +1,6 @@
 const readline = require("readline");
 const cache = require("memory-cache");
+const router = require("./lib/router");
 
 const terminal = readline.createInterface({
   input: process.stdin,
@@ -15,7 +16,7 @@ function promptUser() {
         obj[key] = value || null;
         return obj;
       }, {});
-    console.log(args);
+    console.log(router(args));
     promptUser();
   });
 }
