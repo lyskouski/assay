@@ -14,7 +14,7 @@ class Game {
     const json = storage.get(id);
     assert(json, "Game is missing!");
     this.board = Scoreboard.fromString(json);
-    return game.id;
+    return this.board.id;
   }
 
   _create(home, away) {
