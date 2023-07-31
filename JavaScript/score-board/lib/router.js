@@ -1,5 +1,6 @@
 const assert = require("assert");
 const Game = require("./classes/game");
+const Summary = require("./classes/summary");
 
 function handler(args) {
   switch (true) {
@@ -8,7 +9,7 @@ function handler(args) {
     case "finish" in args:
       return closeGame(args.finish);
     case "summary" in args:
-      break;
+      return plotSummary();
     case "scoreboard" in args:
       return plotScoreboard(args.scoreboard);
     case "id" in args:
@@ -18,13 +19,24 @@ function handler(args) {
   }
 }
 
+function plotSummary(id) {
+  const result = [...Summary.getAll()];
+  return result.map((board) => board.scores()).join('\n');
+}
+
 function plotScoreboard(id) {
-  if (id) {
-    game = new Game({ id });
-    game.board;
-  } else {
-    // ...
+  const result = [];
+  try {
+    if (id) {
+      const game = new Game({ id });
+      result.push(game.board);
+    } else {
+      result.push(...Summary.getActive());
+    }
+  } catch (e) {
+    return `Error! ${e.message}`;
   }
+  return result.map((board) => board.scores()).join('\n');
 }
 
 function createGame(args) {
@@ -58,7 +70,7 @@ function updateScores(args) {
 
 function closeGame(id) {
   try {
-    assert(id > 0, '`finish`-argument is not set');
+    assert(id > 0, "`finish`-argument is not set");
     const game = new Game({ id });
     game.close();
   } catch (e) {

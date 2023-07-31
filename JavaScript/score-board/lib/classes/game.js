@@ -18,11 +18,12 @@ class Game {
   }
 
   _create(home, away) {
-    const key = `${home}-${away}`;
+    this.board = new Scoreboard(0, home, away);
+    const key = this.board.key();
     const check = storage.get(key);
     assert(!check, `Game is already started! Its ID: ${check}`);
     storage.set(key, ++Game.increment);
-    this.board = new Scoreboard(Game.increment, home, away);
+    this.board.id = Game.increment;
     storage.set(Game.increment, this.board.toString());
     return Game.increment;
   }
@@ -32,7 +33,7 @@ class Game {
   }
 
   close() {
-    const key = `${this.board.home}-${this.board.away}`;
+    const key = this.board.key();
     const check = storage.get(key);
     assert(check, `Game with ID#${this.board.id} is already finished!`);
     storage.delete(key);

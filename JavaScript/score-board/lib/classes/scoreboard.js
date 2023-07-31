@@ -15,6 +15,10 @@ class Scoreboard {
     this.updatedAt = Date();
   }
 
+  key() {
+    return `${this.home}-${this.away}`;
+  }
+
   set(home, away) {
     assert(home >= 0, "`home`-attribute is not recognized as a positive number");
     assert(away >= 0, "`away`-attribute is not recognized as a positive number");
@@ -36,7 +40,7 @@ class Scoreboard {
     );
 
     const board = new Scoreboard(obj.id, obj.home, obj.away);
-    board.updatedAt = Date(obj.updatedAt);
+    board.updatedAt = obj.updatedAt;
     board.homeScore = parseInt(obj.homeScore, 10);
     board.awayScore = parseInt(obj.awayScore, 10);
     return board;
