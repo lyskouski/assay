@@ -27,6 +27,10 @@ class Game {
     return Game.increment;
   }
 
+  save() {
+    storage.set(this.board.id, this.board.toString());
+  }
+
   close() {
     const key = `${this.board.home}-${this.board.away}`;
     const check = storage.get(key);

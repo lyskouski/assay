@@ -12,7 +12,7 @@ function handler(args) {
     case "scoreboard" in args:
       break;
     case "id" in args:
-      break;
+      return updateScores(args);
     default:
       return "Command is not recognized, check `README.md` file";
   }
@@ -29,6 +29,22 @@ function createGame(args) {
     return "Error! Check `README.md` file";
   }
   return `Game between "${args.home}" (home) and "${args.away}" (away) is started! Game ID: ${game.id}`;
+}
+
+function updateScores(args) {
+  let game;
+  try {
+    assert(args.id > 0, "`id`-argument is not set");
+    assert("home" in args, "`home`-argument is not set");
+    assert("away" in args, "`away`-argument is not set");
+    game = new Game({ id: args.id });
+    game.board.set(args.home, args.away);
+    game.save();
+  } catch (e) {
+    console.log(e.message);
+    return "Error! Check `README.md` file";
+  }
+  return `Game scored updated! "${game.board.scores()}"`;
 }
 
 function closeGame(id) {
