@@ -43,6 +43,13 @@ describe("Game", () => {
     assert.throws(() => new Game({ id: 1 }).close(), "Game is missing!");
   });
 
+  it("Should fail to update closed game", () => {
+    const stub = sinon.stub(storage, "get");
+    stub.withArgs(1).returns(JSON.stringify(board));
+    stub.withArgs('Team A-Team B').returns(null);
+    assert.throws(() => new Game({ id: 1 }).save(), "Game is already finished! Scores cannot be updated");
+  });
+
   it("Should fail to close finished game", () => {
     const stub = sinon.stub(storage, "get");
     stub.withArgs(1).returns(JSON.stringify(board));

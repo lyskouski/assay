@@ -29,6 +29,8 @@ class Game {
   }
 
   save() {
+    const check = storage.get(this.board.key());
+    assert(check, "Game is already finished! Scores cannot be updated");
     storage.set(this.board.id, this.board.toString());
   }
 
