@@ -14,7 +14,7 @@ describe("Summary", () => {
 
   beforeEach(() => {
     stub = sinon.stub(storage, "get");
-    stub.withArgs(0).returns(
+    stub.withArgs(1).returns(
       JSON.stringify({
         id: 0,
         home: "Team A",
@@ -24,7 +24,7 @@ describe("Summary", () => {
         updatedAt: '2023-07-29',
       })
     );
-    stub.withArgs(1).returns(
+    stub.withArgs(2).returns(
       JSON.stringify({
         id: 1,
         home: "Team C",
@@ -34,7 +34,7 @@ describe("Summary", () => {
         updatedAt: Date(),
       })
     );
-    stub.withArgs(2).returns(
+    stub.withArgs(3).returns(
       JSON.stringify({
         id: 2,
         home: "Team A",
@@ -47,7 +47,7 @@ describe("Summary", () => {
   });
 
   it("Should return all games, ordered by total score, or by the most recently added if equal", () => {
-    Game.increment = 2;
+    Game.increment = 3;
     const scope = Summary.getAll();
     assert.equal(scope.length, 3);
     assert.equal(scope[0].id, 1);
@@ -56,7 +56,7 @@ describe("Summary", () => {
   });
 
   it("Should return active games, ordered by total score, or by the most recently added if equal", () => {
-    Game.increment = 2;
+    Game.increment = 3;
     stub.withArgs('Team A-Team B').returns(1);
     stub.withArgs('Team C-Team B').returns(1);
     stub.withArgs('Team A-Team C').returns(null);
