@@ -1,0 +1,15 @@
+{
+  "name": "score-board",
+  "version": "1.0.0",
+  "description": "Live Football World Cup Score Board",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Viachaslau Lyskouski",
+  "license": "ISC",
+  "dependencies": {
+    "memory-cache": "^0.2.0",
+    "readline": "^1.3.0"
+  }
+}
