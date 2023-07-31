@@ -27,6 +27,13 @@ class Game {
     return Game.increment;
   }
 
+  close() {
+    const key = `${this.board.home}-${this.board.away}`;
+    const check = storage.get(key);
+    assert(check, `Game with ID#${this.board.id} is already finished!`);
+    storage.delete(key);
+  }
+
   get id() {
     return this._id;
   }
