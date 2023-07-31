@@ -4,7 +4,7 @@
   "description": "Live Football World Cup Score Board",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha test/**/*.js --exit"
   },
   "author": "Viachaslau Lyskouski",
   "license": "ISC",

@@ -1,5 +1,8 @@
 Node.js-based application (`npm install` is a precondition).
 
+Run tests:
+> npm test
+
 Start app:
 > node index.js
 ```
