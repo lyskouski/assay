@@ -10,11 +10,20 @@ function handler(args) {
     case "summary" in args:
       break;
     case "scoreboard" in args:
-      break;
+      return plotScoreboard(args.scoreboard);
     case "id" in args:
       return updateScores(args);
     default:
       return "Command is not recognized, check `README.md` file";
+  }
+}
+
+function plotScoreboard(id) {
+  if (id) {
+    game = new Game({ id });
+    game.board;
+  } else {
+    // ...
   }
 }
 
