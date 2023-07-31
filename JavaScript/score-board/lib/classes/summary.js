@@ -5,7 +5,7 @@ const Scoreboard = require("./scoreboard");
 class Summary {
   static getAll() {
     const result = [];
-    for (let i = 0; i <= Game.increment; i++) {
+    for (let i = 1; i <= Game.increment; i++) {
       const str = storage.get(i);
       if (str) {
         result.push(Scoreboard.fromString(str));
