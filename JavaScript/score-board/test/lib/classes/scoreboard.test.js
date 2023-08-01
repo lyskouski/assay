@@ -38,7 +38,7 @@ describe("Scoreboard", () => {
     assert.equal(obj.awayScore, 0);
   });
   
-  it("Should assert nullable values but convert them to zeros", () => {
+  it("Should assert defined values and update date", () => {
     const obj = new Scoreboard(1, "Team A", "Team B");
     obj.set(2, 1);
     assert.equal(obj.homeScore, 2);

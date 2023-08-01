@@ -15,7 +15,7 @@ Enter command:
 Start the game:
 > start home=Mexico away=Canada
 
-Update score (`id` is taken from `--start`): 
+Update score (`id` is taken from `start`): 
 > id=0 home=0 away=0
 
 Finish a game (by `id`):
