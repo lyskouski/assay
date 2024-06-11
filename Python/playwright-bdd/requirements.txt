@@ -1,0 +1,7 @@
+pytest
+playwright
+requests
+pytest-bdd
+pytest-xdist
+pytest-html
+hvac==0.10.11

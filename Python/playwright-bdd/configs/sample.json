@@ -1,0 +1,11 @@
+{
+    "google-url": {
+        "stage": "https://google.com",
+        "local": "https://localhost"
+    },
+    "title": {
+        "dev": "Welcome to Python.org!",
+        "stage": "Welcome to Python.org",
+        "local": "Welcome to Python.org!"
+    }
+}
