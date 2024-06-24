@@ -1,10 +1,19 @@
 import logging
+import os
+import re
 import sys
 from fixtures.fixture_base import *
+from reports.zephyr_report import *
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Recognize 'env' variable from console
+ENV_VARIABLE = '_env'
+for i, arg in enumerate(sys.argv):
+    if arg == '--env' and i + 1 < len(sys.argv):
+        os.environ[ENV_VARIABLE] = sys.argv[i + 1]
 
 # Hook to trace headless argument from a command line
 def pytest_addoption(parser):
@@ -38,8 +47,13 @@ def pytest_runtest_makereport(item, call):
     setattr(item, "rep_call", rep)
 
 def pytest_bdd_apply_tag(tag, function):
+    env = os.environ.get(ENV_VARIABLE)
     if tag == 'todo':
         marker = pytest.mark.skip(reason="Not implemented yet")
+        marker(function)
+        return True
+    elif tag == f'skip-{env}':
+        marker = pytest.mark.skip(reason=f"Skipped in {env} environment")
         marker(function)
         return True
     else:
@@ -50,6 +64,20 @@ def pytest_bdd_apply_tag(tag, function):
 def pytest_bdd_step_error(request, feature, scenario, step, step_func, step_func_args, exception):
     logger.info(f"\n\n[FAILED] Scenario: {scenario.name}\n         Step: {step.keyword} {step.name}\n         Error: {exception}\n\n")
 
+def pytest_bdd_after_scenario(request, feature, scenario):
+    rep = request.node.rep_call
+    match = re.search(r'\[([A-Z]+-[^\]]+)\]', scenario.name)
+    if match:
+        test_case = match.group(1)
+        test_cycle_name = rep.nodeid.split('/')[1]
+        zephyr = JiraRequests(test_cycle_name)
+        if rep.outcome == 'passed':
+            zephyr.set_passed(test_case)
+        elif rep.outcome == 'failed':
+            zephyr.set_failed(test_case, f"Failed '{os.environ.get(ENV_VARIABLE)}', check the latest build")
+        else:
+            zephyr.set_skipped(test_case)
+
 # Add a pytest hook to print to the terminal directly
 @pytest.hookimpl(trylast=True)
 def pytest_report_header(config):
@@ -59,7 +87,6 @@ def pytest_report_header(config):
 
         def write(s, **kwargs):
             original_write(s, **kwargs)
-            logger.info(s.strip())
 
         terminal_reporter.write = write
     else:

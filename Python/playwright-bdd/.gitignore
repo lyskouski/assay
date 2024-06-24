@@ -3,5 +3,6 @@ __pycache__/
 .pytest_cache
 *.pyc
 playwright-report/
-reports/
-configs/_secured.json
+reports/*
+!reports/*.py
+configs/_secured
