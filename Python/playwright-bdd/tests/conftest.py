@@ -71,12 +71,12 @@ def pytest_bdd_after_scenario(request, feature, scenario):
         test_case = match.group(1)
         test_cycle_name = rep.nodeid.split('/')[1]
         zephyr = JiraRequests(test_cycle_name)
-        if rep.outcome == 'passed':
+        report = request.node.__scenario_report__.serialize()
+        failed_steps = [step['name'] for step in report['steps'] if step['failed']]
+        if len(failed_steps) == 0:
             zephyr.set_passed(test_case)
-        elif rep.outcome == 'failed':
-            zephyr.set_failed(test_case, f"Failed '{os.environ.get(ENV_VARIABLE)}', check the latest build")
         else:
-            zephyr.set_skipped(test_case)
+            zephyr.set_failed(test_case, f"Failed for '{os.environ.get(ENV_VARIABLE)}' env, check the latest build")
 
 # Add a pytest hook to print to the terminal directly
 @pytest.hookimpl(trylast=True)
