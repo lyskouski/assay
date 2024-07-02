@@ -48,10 +48,16 @@ def pytest_runtest_makereport(item, call):
 
 def pytest_bdd_apply_tag(tag, function):
     env = os.environ.get(ENV_VARIABLE)
-    if tag == 'todo':
+    # @todo: /{test-cycle-name}/ [{test-case-name}] {reason details}
+    if tag.startswith("todo"):
         marker = pytest.mark.skip(reason="Not implemented yet")
         marker(function)
+        match = re.search(r'/(.*?)/ \[([A-Z]+-[^\]]+)\]', tag)
+        if match:
+            zephyr = JiraRequests(match.group(1))
+            zephyr.set_skipped(match.group(2), tag)
         return True
+    # @skip-stage @skip-local
     elif tag == f'skip-{env}':
         marker = pytest.mark.skip(reason=f"Skipped in {env} environment")
         marker(function)

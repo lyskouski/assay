@@ -50,8 +50,8 @@ class JiraRequests:
         except Exception as e:
             Exception(f"Failed to create: {e}")
 
-    def set_skipped(self, test_case_key) -> None:
-        self._create_test_result(test_case_key, "Blocked", None, "Skipped")
+    def set_skipped(self, test_case_key, reason) -> None:
+        self._create_test_result(test_case_key, "Blocked", None, reason)
 
     def set_passed(self, test_case_key) -> None:
         self._create_test_result(test_case_key, "Pass", None, "")
